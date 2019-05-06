@@ -1,48 +1,92 @@
 " General appearance
-colorscheme default
+colorscheme default " desert
+set bs=2
 syntax on
+set display=lastline " Omit @ if line doesn't fit screen
 set foldcolumn=1
-set guifont=Monospace\ 8
+set guifont=Monospace\ 8 " #win: Courier\ New:h8
+set hlsearch
 set mouse=a
 set cursorline
 set number
 set ruler
+" Status line {
+  set laststatus=2 " Always show status bar
+  set statusline= " Clear statusline
+  set statusline+=%-10.3n\ " Buffer number
+  set statusline+=%f\ " File name
+  set statusline+=%h%m%r%w " Status flags
+  set statusline+=\[%{strlen(&ft)?&ft:'none'}] " File type
+  set statusline+=%= " Right-align remainder
+  set statusline+=0x%-8B " Character value
+  " set statusline+=%-14(%1,%c%V%) " Line, character
+  set statusline+=%<%P " File position
+"}
 set syntax=highlight
 set tpm=64
+
+" #undo
 set undofile
+set undodir=~/.vim/undo/
+
+" au GUIEnter * simalt ~x
+" au VimResized * wincmd =
+" de
 
 set ssop-=options " Do not store global and local values in a session
 set ssop-=folds " Do not store folds
+" set ssop-=curdir " Do not store current directory
+" set ssop-=sesdir " Do store directory of session file as current working directory
 
 nnoremap <silent> <C-S-Left> :execute 'silent! tabmove -1'<CR>
 nnoremap <silent> <C-S-Right> :execute 'silent! tabmove +1'<CR>
-
-" Pathogen
-" execute pathogen#infect()
+nnoremap <silent> <C-S-h> :execute 'silent! tabmove -1'<CR>
+nnoremap <silent> <C-S-l> :execute 'silent! tabmove +1'<CR>
+nnoremap <silent> <C-S-h> :execute 'silent! tabnext'<CR>
+nnoremap <silent> <C-S-k> :execute 'silent! tabprev'<CR>
 
 " Vundle
 set nocompatible
 filetype off
-set runtimepath+=~/.vim/bundle/vundle
-call vundle#rc()
-Bundle 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 
-Bundle 'ervandew/supertab'
-Bundle 'fidian/hexmode'
-" Bundle 'garbas/vim-snipmate'
-Bundle 'majutsushi/tagbar'
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'salsifis/vim-transpose.git'
-Bundle 'tpope/vim-commentary.git'
-Bundle 'tpope/vim-pathogen.git'
-Bundle 'tpope/vim-surround.git'
-Bundle 'vim-scripts/Align.git'
-Bundle 'xolox/vim-misc'
-Bundle 'xolox/vim-notes'
-" Bundle 'vim-scripts/VimLite.git'
-" Bundle 'scrooloose/nerdcommenter'
-" Bundle 'altercation/vim-colors-solarized.git'
-" Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Plugin 'ervandew/supertab'
+Plugin 'fidian/hexmode'
+Plugin 'majutsushi/tagbar'
+Plugin 'Rip-Rip/clang_complete'
+Plugin 'salsifis/vim-transpose.git'
+Plugin 'tpope/vim-commentary.git' " chrisbra/
+Plugin 'tpope/vim-pathogen.git'
+Plugin 'tpope/vim-surround.git' " without .git?
+Plugin 'vim-scripts/Align.git'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
+" Plugin 'junegunn/vim-easy-align'
+" Plugin 'garbas/vim-snipmate'
+" Plugin 'vim-scripts/VimLite.git'
+" Plugin 'scrooloose/nerdcommenter'
+" Plugin 'altercation/vim-colors-solarized.git'
+" Plugin 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+" Plugin 'MatlabFilesEdition'
+" Plugin 'nachumk/systemverilog.vim'
+" Plugin 'vhda/verilog_systemverilog.vim'
+" Plugin 'Valor/ZouCompleteMe'
+" Plugin 'darkburn'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'vim-syntastic/syntastic'
+call vundle#end()
+
+" Syntastic
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " Indentation
 set ai
