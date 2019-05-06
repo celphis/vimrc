@@ -1,11 +1,29 @@
 " General appearance
 colorscheme default " desert
-set bs=2
 syntax on
 set display=lastline " Omit @ if line doesn't fit screen
 set foldcolumn=1
-set guifont=Monospace\ 8 " #win: Courier\ New:h8
-set hlsearch
+set guifont=Monospace\ 8
+" if has("gui_running")
+"   set langmenu=en_US.UTF-8
+"   language en
+"   source $VIMRUNTIME/delmenu.vim
+"   source $VIMRUNTIME/menu.vim
+
+"   if has("gui_gtk2")
+"     set guifont=Monospace\ 8
+"   elseif has("gui_macvim")
+"     set guifont=Menlo\ Regular:h8
+"   elseif has("gui_win32")
+"     au GUIEnter * simalt ~X
+""    au GUIEnter * simalt ~x
+""    au VimResized * wincmd =
+""    de
+"     set guifont=Courier_New:h8:cANSI:qDRAFT
+"   endif
+" endif
+
+set backspace=indent,eol,start " Equals bs=2
 set mouse=a
 set cursorline
 set number
@@ -23,15 +41,12 @@ set ruler
   set statusline+=%<%P " File position
 "}
 set syntax=highlight
+set hlsearch
 set tpm=64
 
 " #undo
 set undofile
 set undodir=~/.vim/undo/
-
-" au GUIEnter * simalt ~x
-" au VimResized * wincmd =
-" de
 
 set ssop-=options " Do not store global and local values in a session
 set ssop-=folds " Do not store folds
@@ -40,10 +55,10 @@ set ssop-=folds " Do not store folds
 
 nnoremap <silent> <C-S-Left> :execute 'silent! tabmove -1'<CR>
 nnoremap <silent> <C-S-Right> :execute 'silent! tabmove +1'<CR>
-nnoremap <silent> <C-S-h> :execute 'silent! tabmove -1'<CR>
-nnoremap <silent> <C-S-l> :execute 'silent! tabmove +1'<CR>
-nnoremap <silent> <C-S-h> :execute 'silent! tabnext'<CR>
-nnoremap <silent> <C-S-k> :execute 'silent! tabprev'<CR>
+nnoremap <silent> <C-h> :execute 'silent! tabmove -1'<CR>
+nnoremap <silent> <C-l> :execute 'silent! tabmove +1'<CR>
+nnoremap <silent> <C-j> :execute 'silent! tabnext'<CR>
+nnoremap <silent> <C-k> :execute 'silent! tabprev'<CR>
 
 " Vundle
 set nocompatible
@@ -63,6 +78,9 @@ Plugin 'tpope/vim-surround.git' " without .git?
 Plugin 'vim-scripts/Align.git'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
+Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'SidOfc/mkdx'
+" Plugin 'rhysd/vim-gfm-syntax'
 " Plugin 'junegunn/vim-easy-align'
 " Plugin 'garbas/vim-snipmate'
 " Plugin 'vim-scripts/VimLite.git'
@@ -104,6 +122,7 @@ set tabstop=2
 
 " clang
 let g:clang_user_options='|| exit 0'
+let g:clang_library_path='/usr/lib/'
 
 " SuperTab
 let g:SuperTabDefaultCompletionType="context"
@@ -123,7 +142,8 @@ nnoremap <silent> ,sr "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o>/\w\+
 nnoremap ,{ {dap}p{
 
 " Commentary
-  " au FileType cls set commentstring=%\ %s
+" au! BufRead,BufNewFile *.md set filetype=mkd
+" au FileType cls set commentstring=%\ %s
 au FileType matlab set commentstring=%\ %s
 au FileType vhdl set commentstring=--\ %s
 au FileType xdc set commentstring=#\ %s
@@ -131,6 +151,13 @@ au FileType ucf set commentstring=#\ %s
 au FileType vb set commentstring='\ %s
 au FileType dosbatch set commentstring=rem\ %s
 au FileType verilog set commentstring=//\ %s
+au FileType markdown set commentstring=\<!--\ %s\ --\>
+au FileType markdown let g:table_mode_corner='|'
+
+" au BufNewFile,BufRead *.py
+"   \ set shiftwidth=4
+"   \ set softtabstop=4
+"   \ set tabstop=4
 
 " Quoting
 nnoremap ,qs :silent! normal "zyiw<Esc>:let @z="'".@z."'"<CR>cw<c-r>z<Esc>b
@@ -140,3 +167,12 @@ nnoremap ,qd :silent! normal "zyiw<Esc>:let @z="\"".@z."\""<CR>cw<c-r>z<Esc>b
 " Auto commands
 " au VimLeave * :mksession! session.vim " Auto-save session
 " au VimEnter * nested TagbarOpen
+
+" #mkdx #gfm #md #markdown
+let g:mkdx#settings = { 'highlight': { 'enable': 1 },
+                      \ 'enter': { 'shift': 1 },
+                      \ 'links': { 'external': { 'enable': 1 } },
+                      \ 'toc': { 'text': 'Table of Contents', 'update_on_write': 1 },
+                      \ 'fold': { 'enable': 1 } }
+let g:polyglot_disabled = ['markdown'] " for vim-polyglot users, it loads Plasticboy's markdown
+                                       " plugin which unfortunately interferes with mkdx list indentation.
