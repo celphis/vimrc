@@ -4,24 +4,24 @@ syntax on
 set display=lastline " Omit @ if line doesn't fit screen
 set foldcolumn=1
 set guifont=Monospace\ 8
-" if has("gui_running")
-"   set langmenu=en_US.UTF-8
-"   language en
-"   source $VIMRUNTIME/delmenu.vim
-"   source $VIMRUNTIME/menu.vim
+if has("gui_running")
+  set langmenu=en_US.UTF-8
+  language en
+  " source $VIMRUNTIME/delmenu.vim
+  " source $VIMRUNTIME/menu.vim
 
-"   if has("gui_gtk2")
-"     set guifont=Monospace\ 8
-"   elseif has("gui_macvim")
-"     set guifont=Menlo\ Regular:h8
-"   elseif has("gui_win32")
-"     au GUIEnter * simalt ~X
-""    au GUIEnter * simalt ~x
-""    au VimResized * wincmd =
-""    de
-"     set guifont=Courier_New:h8:cANSI:qDRAFT
-"   endif
-" endif
+  au VimResized * wincmd =
+  au GUIEnter * simalt ~x
+
+  if has("gui_gtk2")
+    set guifont=Monospace\ 8
+  elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h8
+  elseif has("gui_win32")
+    " de
+    set guifont=Courier_New:h8:cANSI:qDRAFT
+  endif
+endif
 
 set backspace=indent,eol,start " Equals bs=2
 set mouse=a
