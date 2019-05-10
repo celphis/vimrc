@@ -13,6 +13,7 @@ if has("gui_running")
   " au GUIEnter * simalt ~x
 
   if has("gui_gtk2")
+    colorscheme default
     set guifont=Monospace\ 8
   elseif has("gui_macvim")
     set guifont=Menlo\ Regular:h8
