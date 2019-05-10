@@ -3,15 +3,14 @@ colorscheme default " desert
 syntax on
 set display=lastline " Omit @ if line doesn't fit screen
 set foldcolumn=1
-set guifont=Monospace\ 8
 if has("gui_running")
   set langmenu=en_US.UTF-8
-  language en
+  language en_US.UTF-8
   " source $VIMRUNTIME/delmenu.vim
   " source $VIMRUNTIME/menu.vim
 
   au VimResized * wincmd =
-  au GUIEnter * simalt ~x
+  " au GUIEnter * simalt ~x
 
   if has("gui_gtk2")
     set guifont=Monospace\ 8
