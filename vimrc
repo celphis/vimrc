@@ -1,5 +1,5 @@
 " General appearance
-colorscheme default " desert
+colorscheme desert
 syntax on
 set display=lastline " Omit @ if line doesn't fit screen
 set foldcolumn=1
@@ -79,6 +79,10 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'SidOfc/mkdx'
+Plugin 'szymonmaszke/vimpyter'
+" Plugin 'broesler/jupyter-vim'
+" Plugin 'wmvanvliet/jupyter-vim'
+" Plugin 'goerz/jupytext.vim'
 " Plugin 'rhysd/vim-gfm-syntax'
 " Plugin 'junegunn/vim-easy-align'
 " Plugin 'garbas/vim-snipmate'
@@ -126,6 +130,10 @@ let g:clang_library_path='/usr/lib/'
 " SuperTab
 let g:SuperTabDefaultCompletionType="context"
 
+" jupytext
+" let g:jupytext_fmt = 'py'
+" let g:jupytext_filetype_map = {'py':'python'}
+
 " Folding
 set foldmethod=indent
 set nofoldenable
@@ -152,6 +160,8 @@ au FileType dosbatch set commentstring=rem\ %s
 au FileType verilog set commentstring=//\ %s
 au FileType markdown set commentstring=\<!--\ %s\ --\>
 au FileType markdown let g:table_mode_corner='|'
+au FileType ipynb set commentstring=#\ %s
+au FileType awk set commentstring=#\ %s
 
 " au BufNewFile,BufRead *.py
 "   \ set shiftwidth=4
