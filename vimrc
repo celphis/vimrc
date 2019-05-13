@@ -37,7 +37,7 @@ set ruler
   set statusline+=\[%{strlen(&ft)?&ft:'none'}] " File type
   set statusline+=%= " Right-align remainder
   set statusline+=0x%-8B " Character value
-  " set statusline+=%-14(%1,%c%V%) " Line, character
+  set statusline+=%-14(%l,%c%V%) " Line, character
   set statusline+=%<%P " File position
 "}
 set syntax=highlight
