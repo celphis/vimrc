@@ -1,13 +1,13 @@
 " General appearance
-colorscheme desert
+" colorscheme desert
 syntax on
 set display=lastline " Omit @ if line doesn't fit screen
 set foldcolumn=1
 if has("gui_running")
-  set langmenu=en_US.UTF-8
-  language en_US.UTF-8
   " source $VIMRUNTIME/delmenu.vim
   " source $VIMRUNTIME/menu.vim
+
+  set langmenu=en_US.UTF-8
 
   au VimResized * wincmd =
   " au GUIEnter * simalt ~x
@@ -19,7 +19,12 @@ if has("gui_running")
     set guifont=Menlo\ Regular:h8
   elseif has("gui_win32")
     " de
+    colorscheme desert
+    language en " _US.UTF-8
     set guifont=Courier_New:h8:cANSI:qDRAFT
+  else
+    colorscheme default
+    language en_US.UTF-8
   endif
 endif
 
@@ -28,18 +33,18 @@ set mouse=a
 set cursorline
 set number
 set ruler
-" Status line {
-  set laststatus=2 " Always show status bar
-  set statusline= " Clear statusline
-  set statusline+=%-10.3n\ " Buffer number
-  set statusline+=%f\ " File name
-  set statusline+=%h%m%r%w " Status flags
-  set statusline+=\[%{strlen(&ft)?&ft:'none'}] " File type
-  set statusline+=%= " Right-align remainder
-  set statusline+=0x%-8B " Character value
-  set statusline+=%-14(%l,%c%V%) " Line, character
-  set statusline+=%<%P " File position
-"}
+"" Status line {
+"  set laststatus=2 " Always show status bar
+"  set statusline= " Clear statusline
+"  set statusline+=%-10.3n\ " Buffer number
+"  set statusline+=%f\ " File name
+"  set statusline+=%h%m%r%w " Status flags
+"  set statusline+=\[%{strlen(&ft)?&ft:'none'}] " File type
+"  set statusline+=%= " Right-align remainder
+"  set statusline+=0x%-8B " Character value
+"  set statusline+=%-14(%l,%c%V%) " Line, character
+"  set statusline+=%<%P " File position
+""}
 set syntax=highlight
 set hlsearch
 set tpm=64
@@ -70,7 +75,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ervandew/supertab'
 Plugin 'fidian/hexmode'
 Plugin 'majutsushi/tagbar'
-Plugin 'Rip-Rip/clang_complete'
+" Plugin 'xavierd/clang_complete'
 Plugin 'salsifis/vim-transpose.git'
 Plugin 'tpope/vim-commentary.git' " chrisbra/
 Plugin 'tpope/vim-pathogen.git'
@@ -81,6 +86,10 @@ Plugin 'xolox/vim-notes'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'SidOfc/mkdx'
 Plugin 'szymonmaszke/vimpyter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'ycm-core/YouCompleteMe'
 " Plugin 'broesler/jupyter-vim'
 " Plugin 'wmvanvliet/jupyter-vim'
 " Plugin 'goerz/jupytext.vim'
@@ -94,7 +103,6 @@ Plugin 'szymonmaszke/vimpyter'
 " Plugin 'MatlabFilesEdition'
 " Plugin 'nachumk/systemverilog.vim'
 " Plugin 'vhda/verilog_systemverilog.vim'
-" Plugin 'Valor/ZouCompleteMe'
 " Plugin 'darkburn'
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'vim-syntastic/syntastic'
@@ -125,11 +133,11 @@ set tabstop=2
 " let g:NERDSpaceDelims=1
 
 " clang
-let g:clang_user_options='|| exit 0'
-let g:clang_library_path='/usr/lib/'
+" let g:clang_user_options='|| exit 0'
+" let g:clang_library_path='/usr/lib/'
 
 " SuperTab
-let g:SuperTabDefaultCompletionType="context"
+" let g:SuperTabDefaultCompletionType="context"
 
 " jupytext
 " let g:jupytext_fmt = 'py'
@@ -150,7 +158,8 @@ nnoremap <silent> ,sr "_yiw:s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR><c-o>/\w\+
 nnoremap ,{ {dap}p{
 
 " Commentary
-" au! BufRead,BufNewFile *.md set filetype=mkd
+au! BufRead,BufNewFile *.sv set filetype=verilog
+au! BufRead,BufNewFile *.svh set filetype=verilog
 " au FileType cls set commentstring=%\ %s
 au FileType matlab set commentstring=%\ %s
 au FileType vhdl set commentstring=--\ %s
